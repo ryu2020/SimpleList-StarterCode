@@ -90,7 +90,7 @@ public class MyList<T> implements SimpleList<T> {
      *                                       prevents it from being added to this list
      */
     public boolean add(T t) {
-        last = new ListNode(t, last);
+        last = new ListNode<T>(t, last);
         size++;
 
         return true;
@@ -184,7 +184,7 @@ public class MyList<T> implements SimpleList<T> {
         r = (T) current.getContents();
 
         //another generics thing that I can't quite figure out; this call cannot be safely performed because it has not been checked for type agreement
-        
+
         current.setContents(element);
 
         return r;
