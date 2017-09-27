@@ -1,6 +1,4 @@
-/**
- * Created by Bert on 9/26/2017.
- */
+
 public class ListNode<type> {
     private type contents;
     private ListNode next = null;
