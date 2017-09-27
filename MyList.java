@@ -3,8 +3,8 @@ import java.util.Iterator;
 public class MyList<T> implements SimpleList<T> {
 
     private int size;
-    public ListNode first;
-    ListNode last = first;
+    private ListNode first;
+    private ListNode last = first;
 
     public MyList(){
         size = 0;
@@ -28,9 +28,7 @@ public class MyList<T> implements SimpleList<T> {
      * @return <tt>true</tt> if this list contains no elements
      */
     public boolean isEmpty() {
-        if(size == 0)
-        return false;
-        return true;
+        return(size == 0);
     }
 
     /**
@@ -92,7 +90,7 @@ public class MyList<T> implements SimpleList<T> {
      *                                       prevents it from being added to this list
      */
     public boolean add(T t) {
-        last = new ListNode<T>(t, last);
+        last = new ListNode(t, last);
         size++;
 
         return true;
@@ -175,12 +173,18 @@ public class MyList<T> implements SimpleList<T> {
      *                                   (<tt>index &lt; 0 || index &gt;= size()</tt>)
      */
     public T set(int index, T element) {
+        T r = null;
         ListNode current = first;
         for(int i = 1; i < index; i++){
             current = current.getNext();
         }
-        T r = (T) current.getContents();
+
+        if(current.getContents() != null){
+            r = (T) current.getContents();
+        }
+
         current.setContents(element);
+
         return r;
     }
 
@@ -204,14 +208,13 @@ public class MyList<T> implements SimpleList<T> {
      *                                       (<tt>index &lt; 0 || index &gt; size()</tt>)
      */
     public void add(int index, T element) {
-        ListNode insert;
         ListNode current = first;
         ListNode next;
         for(int i = 1; i < index; i++){
             current = current.getNext();
         }
         next = current.getNext();
-        insert = new ListNode(element, next);
+        ListNode<T> insert = new ListNode(element, next);
         current.setNext(insert);
         size++;
     }
