@@ -179,10 +179,12 @@ public class MyList<T> implements SimpleList<T> {
             current = current.getNext();
         }
 
-        if(current.getContents() != null){
-            r = (T) current.getContents();
-        }
+        //not sure how to fix this; generic types do not work with instanceof so i have no way of checking before this cast. Will not return the right thing
 
+        r = (T) current.getContents();
+
+        //another generics thing that I can't quite figure out; this call cannot be safely performed because it has not been checked for type agreement
+        
         current.setContents(element);
 
         return r;
