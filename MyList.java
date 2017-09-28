@@ -6,16 +6,7 @@ public class MyList<T> implements SimpleList<T> {
     private ListNode first;
     private ListNode last;
 
-    public static void main (String[] args){
-        MyList<String> str = new MyList<String>();
-        str.add("2");
-        str.add("a");
-        //System.out.println(str.get(0));
-        //System.out.println(str.get(1));
-        str.add(1, "thing");
-        System.out.println(str.get(1));
-        str.get(2);
-    }
+
 
     public MyList(){
         size = 0;
@@ -141,13 +132,23 @@ public class MyList<T> implements SimpleList<T> {
      *                                       is not supported by this list
      */
     public boolean remove(Object o) {
+
         ListNode current = first;
+        ListNode l = null;
 
         for(int i = 0; i < size; i++){
-            if (current.getContents().equals(o)){
-                current.setNext(current.getNext().getNext());
+            if(i == 0){
+                first = first.getNext();
                 size--;
-                return true;}
+                return true;
+            }
+            if (current.getContents().equals(o)){
+                System.out.println("found");
+                l.setNext(current.getNext().getNext());
+                size--;
+                return true;
+            }
+            l = current;
             current = current.getNext();
         }
 
