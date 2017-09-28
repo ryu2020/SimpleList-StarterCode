@@ -4,7 +4,18 @@ public class MyList<T> implements SimpleList<T> {
 
     private int size;
     private ListNode first;
-    private ListNode last = first;
+    private ListNode last;
+
+    public static void main (String[] args){
+        MyList<String> str = new MyList<String>();
+        str.add("2");
+        str.add("a");
+        //System.out.println(str.get(0));
+        //System.out.println(str.get(1));
+        str.add(1, "thing");
+        System.out.println(str.get(1));
+        str.get(2);
+    }
 
     public MyList(){
         size = 0;
@@ -64,7 +75,7 @@ public class MyList<T> implements SimpleList<T> {
      * @return an iterator over the elements in this list in proper sequence
      */
     public Iterator<T> iterator() {
-        return null;
+        return new ListIterator<T>(this);
     }
 
     /**
@@ -90,7 +101,19 @@ public class MyList<T> implements SimpleList<T> {
      *                                       prevents it from being added to this list
      */
     public boolean add(T t) {
-        last = new ListNode<T>(t, last);
+        if(size == 0){
+            //System.out.println("first");
+            first.setContents(t);
+            last = first;
+            size++;
+            return true;
+        }
+        ListNode<T> temp = new ListNode<T>(t);
+        //System.out.println(temp);
+        last.setNext(temp);
+
+       // System.out.println(last.getNext());
+        last = temp;
         size++;
 
         return true;
@@ -150,9 +173,13 @@ public class MyList<T> implements SimpleList<T> {
      */
     public T get(int index) {
         ListNode current = first;
-        for(int i = 1; i < index; i++){
+        for(int i = 0; i < index; i++){
+            if(current.getNext() == null){
+                throw new IndexOutOfBoundsException();
+            }
             current = current.getNext();
         }
+        //System.out.println(current);
         return (T) current.getContents();
     }
 
@@ -178,7 +205,7 @@ public class MyList<T> implements SimpleList<T> {
         for(int i = 1; i < index; i++){
             current = current.getNext();
         }
-
+        System.out.println(current);
         //not sure how to fix this; generic types do not work with instanceof so i have no way of checking before this cast. Will not return the right thing
 
         r = (T) current.getContents();
@@ -210,15 +237,26 @@ public class MyList<T> implements SimpleList<T> {
      *                                       (<tt>index &lt; 0 || index &gt; size()</tt>)
      */
     public void add(int index, T element) {
-        ListNode current = first;
-        ListNode next;
-        for(int i = 1; i < index; i++){
-            current = current.getNext();
+        if(index < 0 || index > size){
+            throw new IndexOutOfBoundsException();
         }
-        next = current.getNext();
-        ListNode<T> insert = new ListNode(element, next);
-        current.setNext(insert);
-        size++;
+        if(index == 0){
+            ListNode n = new ListNode(element, first);
+            first = n;
+            size++;
+        }
+        else {
+            ListNode before = first;
+            ListNode next;
+            for (int i = 1; i < index; i++) {
+                before = before.getNext();
+            }
+            System.out.println(before);
+            ListNode after = before.getNext();
+            ListNode<T> insert = new ListNode(element, after);
+            before.setNext(insert);
+            size++;
+        }
     }
 
     /**
@@ -269,5 +307,9 @@ public class MyList<T> implements SimpleList<T> {
             current = current.getNext();
         }
         return -1;
+    }
+
+    public ListNode getLast(){
+        return last;
     }
 }

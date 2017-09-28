@@ -31,6 +31,11 @@ public class ListNode<type> {
     public void setNext(ListNode next) {
         this.next = next;
     }
-
+    public String toString(){
+        if(contents == null){
+            return "null";
+        }
+        return contents.toString();
+    }
 
 }
