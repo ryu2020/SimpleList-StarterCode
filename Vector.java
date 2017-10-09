@@ -2,6 +2,13 @@ import java.util.Iterator;
 
 public class Vector<E> implements SimpleList<E>{
 
+    public static void main(String[] args){
+        Vector<String> v = new Vector<String>();
+        v.add("a");
+        v.set(0, "b");
+        System.out.println(v.get(0));
+    }
+
     private Object[] arr = new Object[0];
 
     /**
@@ -58,7 +65,7 @@ public class Vector<E> implements SimpleList<E>{
      */
     @Override
     public Iterator<E> iterator() {
-        return null;
+        return new VectorIterator(this);
     }
 
     /**
@@ -90,6 +97,7 @@ public class Vector<E> implements SimpleList<E>{
             arr2[x] = arr[x];
         }
         arr2[arr.length] = e;
+        arr = arr2;
         return true;
     }
 
@@ -117,9 +125,11 @@ public class Vector<E> implements SimpleList<E>{
     @Override
     public boolean remove(Object o) {
         Object[] arr2 = new Object[arr.length - 1];
+        int count = 0;
         for(int x = 0; x < arr.length; x++){
-            if(arr[x] != o){
-                arr2[x] = arr[x];
+            if(!arr[x].equals(o)){
+                arr2[count] = arr[x];
+                count++;
             }
         }
         arr = arr2;
