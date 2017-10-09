@@ -2,13 +2,6 @@ import java.util.Iterator;
 
 public class Vector<E> implements SimpleList<E>{
 
-    public static void main(String[] args){
-        Vector<String> v = new Vector<String>();
-        v.add("a");
-        v.set(0, "b");
-        System.out.println(v.get(0));
-    }
-
     private Object[] arr = new Object[0];
 
     /**
