@@ -1,0 +1,19 @@
+﻿1. Will check that a new list has a length of zero
+2. Will check that the size method returns the number of elements in the list
+3. Will check that adding an object at index -1 will throw an indexoutofboundsexception
+4. Will check that adding an object outside of the current size of the list will throw an indexoutofboundsexception
+5. Will check that adding an object at the beginning of a list given the index 0 will behave accordingly
+6. Will check that the add(object) method will append to the end of the list
+7. Will check that an add to the middle will shift the other elements accordingly
+8. Will check that a get from an empty list will throw indexoutofboundsexception
+9. Will check that a get from a negative index will throw indexoutofboundsexception
+10. Will check that a valid get will behave accordingly
+11. Will check that a valid remove(object) will remove the object specified
+12. Will check that a valid remove(index) will remove the object specified
+13. Will check that a remove(index) from an index outside of the list will throw indexoutofboundsexception
+14. Will check that a remove(index) from a negative index will throw indexoutofboundsexception
+15. Will check that valid set will behave accordingly
+16. Will check that a set in an index outside of the list will throw indexoutofboundsexception
+17. Will test that a clear will remove all elements from the list
+18. Will test that a clear will remove all elements from the list using the isEmpty method
+19. Will make sure that the equals method will actually compare the elements of two lists
